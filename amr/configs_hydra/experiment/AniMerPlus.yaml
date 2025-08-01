@@ -1,0 +1,129 @@
+# @package _global_
+
+defaults:
+  - default.yaml
+
+# total steps, log steps, val_steps, num_workers, LR, batch size
+GENERAL:
+  TOTAL_STEPS: 1_400_000 
+  LOG_STEPS: 1
+  VAL_STEPS: 1
+  VAL_EPOCHS: 100
+  CHECKPOINT_EPOCHS: 20
+  CHECKPOINT_SAVE_TOP_K: 1
+  NUM_WORKERS: 64
+  PREFETCH_FACTOR: 2
+
+LOSS_WEIGHTS:
+  AVES:
+    KEYPOINTS_3D: 0.05
+    KEYPOINTS_2D: 0.01
+    GLOBAL_ORIENT: 0.001
+    POSE: 0.001
+    BETAS: 0.0005
+    BONE: 0.002
+    ADVERSARIAL: 0.
+    MASK: 0.02
+    POSE_RE: 0.05
+    BETAS_RE: 0.001
+    BONE_RE: 0.1
+  SMAL: 
+    KEYPOINTS_3D: 0.05
+    KEYPOINTS_2D: 0.01
+    GLOBAL_ORIENT: 0.001
+    POSE: 0.001
+    BETAS: 0.0005
+    ADVERSARIAL: 0
+    MASK: 0.0
+  SUPCON: 0.0005
+
+TRAIN:
+  LR: 1.25e-6
+  WEIGHT_DECAY: 1e-4
+  BATCH_SIZE: 16
+  LOSS_REDUCTION: mean
+  NUM_TRAIN_SAMPLES: 2
+  NUM_TEST_SAMPLES: 64
+  POSE_2D_NOISE_RATIO: 0.01
+  SMPL_PARAM_NOISE_RATIO: 0.005
+
+MODEL:
+  IMAGE_SIZE: 256
+  IMAGE_MEAN: [0.485, 0.456, 0.406]
+  IMAGE_STD: [0.229, 0.224, 0.225]
+  BACKBONE:
+    USE_CLS: true
+    TYPE: vithmoe
+    PRETRAINED_WEIGHTS: data/vitmoe.pth
+  AVES_HEAD:
+    TYPE: transformer_decoder
+    IN_CHANNELS: 2048
+    IEF_ITERS: 1
+    TRANSFORMER_DECODER:
+      depth: 6
+      heads: 8
+      mlp_dim: 1024
+      dim_head: 64
+      dropout: 0.0
+      emb_dropout: 0.0
+      norm: layer
+      context_dim: 1280
+  SMAL_HEAD:
+    TYPE: transformer_decoder
+    IN_CHANNELS: 2048
+    IEF_ITERS: 1
+    TRANSFORMER_DECODER:
+      depth: 6
+      heads: 8
+      mlp_dim: 1024
+      dim_head: 64
+      dropout: 0.0
+      emb_dropout: 0.0
+      norm: layer
+      context_dim: 1280
+  CLASS_TOKEN_HEAD:
+    embed_dim: 1280
+    hidden_dim: 4096 
+    output_dim: 256 
+    num_layers: 3 
+    last_bn: true
+
+DATASETS:
+  CUB:
+    ROOT_IMAGE: path/to/CUB
+    ANNOTATIONS: 
+      TRAIN: path/to/train.mat
+      TEST: path/to/test.mat
+    JSON_FILE:
+      TEST: path/to/test.json
+    WEIGHT: 0.45
+  ANIMAL3D:
+    ROOT_IMAGE: path/to/animal3d
+    JSON_FILE:
+      TRAIN: path/to/train.json
+      TEST: path/to/test.json
+    WEIGHT: 1
+  CTRLAVES3D:
+    ROOT_IMAGE: path/to/ctrlaves3d
+    JSON_FILE:
+      TRAIN: path/to/train.json
+      TEST: path/to/test.json
+    WEIGHT: 1
+
+AVES:
+  FOCAL_LENGTH: 2167
+  MODEL_PATH: data/aves/aves_high_res.pt
+  POSE_PRIOR_PATH: data/aves/aves_high_res.pt
+  NUM_JOINTS: 24
+
+SMAL:
+  FOCAL_LENGTH: 1000
+  MODEL_PATH: data/smal/my_smpl_00781_4_all.pkl
+  SHAPE_PRIOR_PATH: data/smal/my_smpl_data_00781_4_all.pkl
+  POSE_PRIOR_PATH: data/smal/walking_toy_symmetric_pose_prior_with_cov_35parts.pkl
+  NUM_JOINTS: 34
+
+EXTRA:
+  NUM_LOG_IMAGES: 4
+  NUM_LOG_SAMPLES_PER_IMAGE: 4
+  PELVIS_IND: 0
