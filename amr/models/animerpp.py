@@ -252,29 +252,20 @@ class AniMerPlusPlus(pl.LightningModule):
                 loss_params[k] = self.parameter_loss(pred.reshape(batch_size, -1),
                                                      gt[:, :15].reshape(batch_size, -1),
                                                      has_gt)
-                # v1
                 loss_params[k+"_re"] = torch.sum(pred[has_gt.bool()] ** 2) + torch.sum(pred[has_gt.bool()] ** 2) * 0.5
-                # v2
-                # loss_params[k+"_re"] = torch.sum(pred ** 2)
             elif k == "bone":
                 loss_params[k] = self.parameter_loss(pred.reshape(batch_size, -1),
                                                      gt.reshape(batch_size, -1),
                                                      has_gt)
-                # v1
                 loss_params[k+"_re"] = self.posebone_prior_loss.l2_loss(pred, self.posebone_prior_loss.bone_mean, 1 - has_gt) + \
                                        self.posebone_prior_loss.l2_loss(pred, self.posebone_prior_loss.bone_mean, has_gt) * 0.02
-                # v2
-                # loss_params[k+"_re"] = self.posebone_prior_loss.l2_loss(pred, self.posebone_prior_loss.bone_mean, torch.zeros_like(has_gt))
             elif k == "pose":
                 loss_params[k] = self.parameter_loss(pred.reshape(batch_size, -1),
                                                      gt[:, :24].reshape(batch_size, -1),
                                                      has_gt)
                 pose_axis_angle = matrix_to_axis_angle(pred)
-                # v1
                 loss_params[k+"_re"] = self.posebone_prior_loss.l2_loss(pose_axis_angle.reshape(batch_size, -1), self.posebone_prior_loss.pose_mean, 1 - has_gt) + \
                                        self.posebone_prior_loss.l2_loss(pose_axis_angle.reshape(batch_size, -1), self.posebone_prior_loss.pose_mean, has_gt) * 0.02
-                # v2
-                # loss_params[k+"_re"] = self.posebone_prior_loss.l2_loss(pose_axis_angle.reshape(batch_size, -1), self.posebone_prior_loss.pose_mean, torch.zeros_like(has_gt))
             else:
                 loss_params[k] = self.parameter_loss(pred.reshape(batch_size, -1), 
                                                      gt.reshape(batch_size, -1),
