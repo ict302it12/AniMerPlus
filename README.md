@@ -1,5 +1,5 @@
 # AniMer: Animal Pose and Shape Estimation Using Family Aware Transformer
-[**Arxiv**]() | [**Project Page**](https://animerplus.github.io/) | [**Hugging Face Demo**](https://huggingface.co/spaces/luoxue-star/AniMerPlus)
+[**Arxiv**](https://arxiv.org/abs/2508.00298) | [**Project Page**](https://animerplus.github.io/) | [**Hugging Face Demo**](https://huggingface.co/spaces/luoxue-star/AniMerPlus)
 
 ## Environment Setup
 ```bash
@@ -57,6 +57,17 @@ If you find this code useful for your research, please consider citing the follo
   booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
   pages={17486--17496},
   year={2025}
+}
+```
+```bibtex
+@misc{lyu2025animerunifiedposeshape,
+      title={AniMer+: Unified Pose and Shape Estimation Across Mammalia and Aves via Family-Aware Transformer}, 
+      author={Jin Lyu and Liang An and Li Lin and Pujin Cheng and Yebin Liu and Xiaoying Tang},
+      year={2025},
+      eprint={2508.00298},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2508.00298}, 
 }
 ```
 
