@@ -1,4 +1,4 @@
-# AniMer: Animal Pose and Shape Estimation Using Family Aware Transformer
+# AniMer+: Unified Pose and Shape Estimation Across Mammalia and Aves via Family-Aware Transformer
 [**Arxiv**](https://arxiv.org/abs/2508.00298) | [**Project Page**](https://animerplus.github.io/) | [**Hugging Face Demo**](https://huggingface.co/spaces/luoxue-star/AniMerPlus)
 
 ## Environment Setup
