@@ -32,7 +32,7 @@ so the version released now is the result of retraining after we fixed it.
 Downloading the pretrained backbone and Our dataset from [here](https://drive.google.com/drive/folders/146ic3vnlgqutY3lh6BdV7ZXt9Ox2VAfh?usp=sharing). Then, processing the data format to be consistent with Animal3D and replacing the training data path in the configs_hydra/experiment/AniMerPlus.yaml file. 
 After that, you can train the model using the following command:
 ```bash
-python train.py exp_name=AniMerPlus experiment=AniMerPlus trainer=gpu launcher=local 
+python main.py exp_name=AniMerPlus experiment=AniMerPlus trainer=gpu launcher=local 
 ```
 
 ## Evaluation
@@ -49,7 +49,7 @@ Parts of the code are borrowed from the following repos:
 - [SupContrast](https://github.com/HobbitLong/SupContrast)
 
 ## Citation
-If you find this code useful for your research, please consider citing the following paper:
+If you find this code useful for your research, please consider citing the following papers:
 ```bibtex
 @inproceedings{lyu2025animer,
   title={AniMer: Animal Pose and Shape Estimation Using Family Aware Transformer},
