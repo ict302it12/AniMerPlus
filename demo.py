@@ -25,7 +25,7 @@ def main():
     import time
     start = time.time()
     parser = argparse.ArgumentParser(description='AniMerPlus demo code')
-    parser.add_argument('--checkpoint', type=str, default="data/AniMerPlus/checkpoint.ckpt",
+    parser.add_argument('--checkpoint', type=str, default="data/AniMerPlus/checkpoints/checkpoint.ckpt",
                         help='Path to pretrained model checkpoint')
     parser.add_argument('--img_folder', type=str, default='example_data/', help='Folder with input images')
     parser.add_argument('--out_folder', type=str, default='demo_out', help='Output folder to save rendered results')
@@ -36,7 +36,7 @@ def main():
     parser.add_argument('--batch_size', type=int, default=1, help='Batch size for inference/fitting')
     parser.add_argument('--file_type', nargs='+', default=['*.jpg', '*.png', '*JPEG'],
                         help='List of file extensions to consider')
-    parser.add_argument('--animal_type', type=str, choices=["mammal, bird"], default="bird",
+    parser.add_argument('--animal_type', type=str, choices=["mammal", "bird"], default="bird",
                         help='Type of animal to render (mammal or bird)')
 
     args = parser.parse_args()

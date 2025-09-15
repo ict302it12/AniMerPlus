@@ -3,20 +3,35 @@
 
 ## Environment Setup
 ```bash
-git clone https://github.com/luoxue-star/AniMerPlus.git
+git clone https://github.com/ict302it12/AniMerPlus.git
 conda create -n AniMerPlus python=3.10
+conda activate AniMerPlus
 cd AniMerPlus
 # install pytorch
 pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu124
-pip install -e .[all]
+# install detectron2 and chumpy
+pip install git+https://github.com/facebookresearch/detectron2.git --use-pep517 --no-build-isolation
+pip install git+https://github.com/mattloper/chumpy.git --use-pep517 --no-build-isolation
+# install other dependencies
+pip install -e .[all] --use-pep517
 # install pytorch3d
-pip install "git+https://github.com/facebookresearch/pytorch3d.git"
+pip install git+https://github.com/facebookresearch/pytorch3d.git --use-pep517 --no-build-isolation
 ```
 
 ## Gradio demo
 Downloading the checkpoint folder named AniMerPlus from [here](https://drive.google.com/drive/folders/146ic3vnlgqutY3lh6BdV7ZXt9Ox2VAfh?usp=sharing) to `data/`. Then you can try our model by:
 ```bash
 python app.py
+```
+
+If there is an error regarding OpenGL's EGL library:
+1. Open the following files in a text editor:
+    - `amr/utils/mesh_renderer.py`
+    - `amr/utils/renderer.py`
+2. Comment out the following lines of code in lines 3 and 4:
+```py
+if 'PYOPENGL_PLATFORM' not in os.environ:
+    os.environ['PYOPENGL_PLATFORM'] = 'egl'
 ```
 
 ## Testing

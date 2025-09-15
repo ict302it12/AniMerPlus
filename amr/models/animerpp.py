@@ -86,7 +86,7 @@ class AniMerPlusPlus(pl.LightningModule):
         # Only appling for AVES training
         self.aves_silouette_render = SilhouetteRenderer(size=self.cfg.MODEL.IMAGE_SIZE,
                                                         focal=self.cfg.AVES.get("FOCAL_LENGTH", 2167),
-                                                        device='cuda')
+                                                        device='cuda' if torch.cuda.is_available() else 'cpu')
 
         self.automatic_optimization = False
 
