@@ -19,7 +19,24 @@ pip install git+https://github.com/facebookresearch/pytorch3d.git --use-pep517 -
 ```
 
 ## Gradio demo
-Downloading the checkpoint folder named AniMerPlus from [here](https://drive.google.com/drive/folders/146ic3vnlgqutY3lh6BdV7ZXt9Ox2VAfh?usp=sharing) to `data/`. Then you can try our model by:
+Downloading the checkpoint folder named `AniMerPlus`, the pretrained backbone, and our dataset from [here](https://drive.google.com/drive/folders/146ic3vnlgqutY3lh6BdV7ZXt9Ox2VAfh?usp=sharing) to `data/`.
+You also may need to replace the `smal` folder with the one from [here](https://huggingface.co/spaces/luoxue-star/AniMerPlus/tree/main/data/smal).
+Edit the file structure so that it matches this:
+```
+data/
+|--- AniMerPlus/
+|    |--- .hydra/
+|    |    |--- config.yaml
+|    |--- checkpoints/
+|    |    |--- checkpoint.ckpt
+|--- aves/
+|    |--- aves_high_res.pt
+|    |--- pose_bone_prior.pth
+|--- smal/
+|    |--- ...
+|--- vitmoe.pth
+```
+Then you can try our model by:
 ```bash
 python app.py
 ```
